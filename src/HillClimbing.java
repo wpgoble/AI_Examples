@@ -3,6 +3,7 @@
 // FOR DEMO USE ONLY
 
 import javax.swing.*;
+import java.awt.*;
 import java.util.Random;
 
 public class HillClimbing extends JFrame implements Runnable {
@@ -107,7 +108,41 @@ public class HillClimbing extends JFrame implements Runnable {
         return Math.sqrt(dx * dx + dy * dy);
     }
 
+    // visualization code
     public HillClimbing() {
+        setContentPane(new JPanel() {
+            protected void paintComponent(Graphics g) {
+                super.paintComponent(g);
+                ((Graphics2D) g).setRenderingHint(
+                    RenderingHints.KEY_ANTIALIASING, 
+                    RenderingHints.VALUE_ANTIALIAS_ON);
+                ((Graphics2D) g).setStroke(new BasicStroke(3));
+                g.setColor(Color.BLUE);
+
+                int w = getWidth() - 5;
+                int h = getHeight() - 30;
+
+                for(int i = 0, j = n - 1; i < n; j = i++) {
+                    g.drawLine( (int) (x[bestState[i]] * w), 
+                                (int)((1 - y[bestState[i]]) * h), 
+                                (int)(x[bestState[j]] * w), 
+                                (int)((1 - y[bestState[j]]) * h) 
+                    );
+                }
+                g.setColor(Color.RED);
+                for(int i = 0; i < n; i++) {
+                    g.drawOval( (int) (x[i] * w) - 1,
+                                (int) ((1 - y[i]) * h) - 1,
+                                3, 3);
+                }
+                g.setColor(Color.BLACK);
+                g.drawString(String.format("length: %.3f", eval(bestState)), 
+                            5, h + 20);
+            }
+        });
+        setSize(new Dimension(600, 600));
+        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        setVisible(true);
         new Thread(this).start();   // necessary for calling the run method.
     }
 
