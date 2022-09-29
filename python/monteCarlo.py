@@ -10,19 +10,22 @@ def coin_flip():
     """
     return random.randint(0, 1)
 
+def roll_die():
+    return random.randint(1, 6)
+
 def monteCarlo(n_itr):
     results = 0
     lst = list()
 
     for n in range(n_itr):
-        flip_results = coin_flip()
+        flip_results = roll_die()
         results += flip_results
 
         # Calculatings the probability value
         prob_val = results / (n + 1)
         lst.append(prob_val)
 
-    plt.axhline(y = 0.5, color='r')
+    plt.axhline(y = 3.5, color='r')
     plt.xlabel("Iterations")
     plt.ylabel("Probability")
     plt.plot(lst)
