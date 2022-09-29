@@ -92,6 +92,14 @@ public class HillClimbing extends JFrame implements Runnable {
             j = (j - 1 + n) % n;
         }        
     }
+
+    double eval(int[] state) {
+        double res = 0;
+        for(int i = 0, j = state.length - 1; i < state.length; j = i++) {
+            res += dist(x[state[i]], y[state[i]], x[state[j]], y[state[j]]);
+        }
+        return res;
+    }
     
     static double dist(double x1, double y1, double x2, double y2) {
         double dx = x1 - x2;
