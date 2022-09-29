@@ -14,6 +14,10 @@ public class HillClimbing extends JFrame implements Runnable {
     double[] x = new double[n];
     double[] y = new double[n];
 
+    public static void main(String[] args) {
+        new HillClimbing();
+    }
+
     public void setXYValues() {
         for(int i = 0; i < n; i++) {
             x[i] = rand.nextDouble();
@@ -22,7 +26,13 @@ public class HillClimbing extends JFrame implements Runnable {
     }
 
     public void climb() {
-        System.out.println("Hello, World");
+        for (int i = 0; i < 15; i++) {
+            System.out.println(x[i]);
+        }
+    }
+
+    public HillClimbing() {
+        new Thread(this).start();   // necessary for calling the run method.
     }
 
     @Override
