@@ -26,9 +26,36 @@ public class HillClimbing extends JFrame implements Runnable {
     }
 
     public void climb() {
-        for (int i = 0; i < 15; i++) {
-            System.out.println(x[i]);
+        int[] curState = new int[n];
+
+        for(int i = 0; i < n; i++) {
+            curState[i] = i;
         }
+
+        bestState = curState.clone();
+        boolean done = false;
+
+        while(!done) {
+            double bestDelta = 0.0;
+            int best_I = -1;
+            int best_J = -1;
+
+            for(int i = 0; i < n; i++) {
+                for(int j = i+1; j < n; j++) {
+                    int i1 = (i - 1 + n) % n;
+                    int j1 = (j + 1) % n;
+                    double delta = dist(x[curState[i1]], y[curState[i1]], 
+                                        x[curState[j]], y[curState[j]]) 
+                                    + dist()
+                }
+            }
+        }
+    }
+
+    static double dist(double x1, double y1, double x2, double y2) {
+        double dx = x1 - x2;
+        double dy = y1 - y2;
+        return Math.sqrt(dx * dx + dy * dy);
     }
 
     public HillClimbing() {
