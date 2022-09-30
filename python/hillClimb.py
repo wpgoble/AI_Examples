@@ -1,10 +1,19 @@
 # Objective function
-from numpy import asarray
+from numpy import asarray, arange
 from numpy.random import randn, rand, seed
 from matplotlib import pyplot as plt
 
 def objective(x):
     return x[0]**2.0
+
+def plot_curve():
+    r_min, r_max = -5.0, 5.0
+    inputs = arange(r_min, r_max, 0.1)
+    results = [objective([x]) for x in inputs]
+    plt.plot(inputs, results)
+    x_optima = 0.0
+    plt.axvline(x = x_optima, ls='--', color = 'red')
+    plt.show()
 
 def hillClimbing(objective, bounds, n_itr, step_size):
     # generate an initial point
@@ -45,4 +54,5 @@ def main():
     plt.show()
 
 if __name__ == '__main__':
-    main()
+    plot_curve()
+    #main()
