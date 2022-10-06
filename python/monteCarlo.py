@@ -13,6 +13,9 @@ def coin_flip():
 def roll_die():
     return random.randint(1, 6)
 
+def get_grade():
+    return random.uniform(50.0, 100.0)
+
 def monteCarlo(n_itr, game):
     results = 0
     lst = list()
@@ -20,8 +23,11 @@ def monteCarlo(n_itr, game):
     for n in range(n_itr):
         if game == "die":
             rand_results = roll_die()
-        else:
+        elif game == "coin":
             rand_results = coin_flip()
+        else:
+            rand_results = get_grade()
+
         results += rand_results
 
         # Calculatings the probability value
@@ -30,8 +36,11 @@ def monteCarlo(n_itr, game):
 
     if game == "die":
         plt.axhline(y = 3.5, color='r')
-    else:
+    elif game == "coin":
         plt.axhline(y = 0.5, color='r')
+    else:
+        plt.axhline(y = 75, color = 'r')
+
     plt.xlabel("Iterations")
     plt.ylabel("Probability")
     plt.plot(lst)
@@ -41,7 +50,8 @@ def monteCarlo(n_itr, game):
 
 def main():
     #answer = monteCarlo(10000, "coin")
-    answer = monteCarlo(10000, "die")
+    #answer = monteCarlo(10000, "die")
+    answer = monteCarlo(10000, "grade")
     print(f"Final Answer:\t{answer}")
 
 if __name__ == '__main__':
